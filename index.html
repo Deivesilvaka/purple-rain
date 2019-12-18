@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>
+		Purple Rain
+	</title>
+
+	<style>
+		canvas{
+			position: absolute;
+			margin: auto;
+			top: 0px;
+			left: 0px;
+			right: 0px;
+			bottom: 0px;
+			border: 3px solid green;
+			background-color: #888888;
+		}
+	</style>
+
+</head>
+<body bgcolor="black">
+
+	<embed src="chuva.mp3" loop="true" autostart="true" hidden="true"></embed>
+
+	<canvas width="600px" height="400px"></canvas>
+
+	<script src="gotas.js"></script>
+	<script>
+		
+		var cnv = document.querySelector("canvas");
+		var ctx = cnv.getContext("2d");
+
+		var Chuva = [];
+
+		for(var i = 0; i <= 999; i++) {
+			Chuva[i] = new gotas();
+		}
+
+		function loop() {
+			window.requestAnimationFrame(loop,cnv);
+			draw();
+			update();
+		}
+
+		function update() {
+			for(var i in Chuva) {
+				var chu = Chuva[i];
+				chu.update();
+			}
+		}
+
+		function draw() {
+			ctx.clearRect(0, 0, cnv.width, cnv.height);
+			for(var i in Chuva) {
+				var chu = Chuva[i];
+				chu.draw();
+			}
+		}
+
+		loop();
+
+	</script>
+
+</body>
+</html>
